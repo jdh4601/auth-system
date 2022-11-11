@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  // useEffect hook을 사용한 이유??
+  // ?
   useEffect(() => {
     const checkUser = () => {
       if (!localStorage.getItem) {

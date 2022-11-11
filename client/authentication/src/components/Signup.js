@@ -7,6 +7,7 @@ const Signup = () => {
   const [tel, setTel] = useState('');
   const [password, setPassword] = useState('');
 
+  // user data from signup to register api
   const postSignUpDetails = () => {
     fetch('http://localhost:4000/api/register', {
       method: 'POST',
@@ -27,8 +28,10 @@ const Signup = () => {
           alert(data.error_message);
         } else {
           // if user data is in server
+          console.log('username:', data.data);
+          localStorage.setItem('username', data.data.username);
           alert(data.message);
-          navigate('/');
+          navigate('/phone/verify/');
         }
       })
       .catch(err => console.err(err));
