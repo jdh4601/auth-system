@@ -7,9 +7,37 @@ const Signup = () => {
   const [tel, setTel] = useState('');
   const [password, setPassword] = useState('');
 
+  const postSignUpDetails = () => {
+    fetch('http://localhost:4000/api/register', {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        username,
+        tel,
+        password,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        // if user data isn't in server
+        if (data.error_message) {
+          alert(data.error_message);
+        } else {
+          // if user data is in server
+          alert(data.message);
+          navigate('/');
+        }
+      })
+      .catch(err => console.err(err));
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
     console.log(username, tel, email, password);
+    postSignUpDetails();
     setEmail('');
     setPassword('');
     setUsername('');
